@@ -1,10 +1,10 @@
 cabal-version:      2.2
-category:           Random, Vector
+category:           Data
 build-type:         Simple
 
 name:               unboxed-references
 synopsis:           A library for reference cells backed by unboxed-vectors
-version:            0.2.0
+version:            0.1.0
 
 author:             Callan McGill
 maintainer:         callan.mcgill@gmail.com
@@ -19,51 +19,49 @@ description:
     .
     For an example of how to use it:
     .
-    @
-        module Main where
-        .
-        import           Data.STRef.Unboxed
-        import           Control.Monad.ST
-        .
-        main :: IO ()
-        main =
-          do
-            print counter
-            print mySum
-            print strictModify
-        .
-        -- |
-        -- Runs a for loop each time modifying the reference cell to add
-        -- one.
-        counter :: Int
-        counter =
-          runST $
-            do
-              ref <- newSTRefU 0
-              for_ [1..100] $ modifySTRefU ref (+ 1)
-              readSTRefU ref
-        .
-        -- |
-        -- Runs a for loop to add all the numbers between 1 and 10.
-        mySum :: Int
-        mySum =
-          runST $
-            do
-              ref <- newSTRefU 0
-              for_ [1..10] $ \i -> modifySTRefU ref (+ i)
-              readSTRefU ref
-        .
-        -- |
-        -- This shows that modifySTRefU is strict in its argument.
-        strictModify :: Int
-        strictModify =
-          runST $
-            do
-              ref <- newSTRefU 0
-              modifySTRefU ref (\_ -> Unsafe.unsafePerformIO $ print "Got here!" >> pure 10)
-              writeSTRefU ref 42
-              readSTRefU ref
-    @
+    >
+    >   module Main where
+    >   
+    >   import           Data.STRef.Unboxed
+    >   import           Control.Monad.ST
+    >   
+    >   main :: IO ()
+    >   main =
+    >     do
+    >       print counter
+    >       print mySum
+    >       print strictModify
+    >   
+    >   -- |
+    >   -- Runs a for loop each time modifying the reference cell to add
+    >   -- one.
+    >   counter :: Int
+    >   counter =
+    >    runST $
+    >      do
+    >        ref <- newSTRefU 0
+    >        for_ [1..100] $ modifySTRefU ref (+ 1)
+    >        readSTRefU ref
+    >   -- |
+    >   -- Runs a for loop to add all the numbers between 1 and 10.
+    >   mySum :: Int
+    >   mySum =
+    >     runST $
+    >       do
+    >         ref <- newSTRefU 0
+    >         for_ [1..10] $ \i -> modifySTRefU ref (+ i)
+    >         readSTRefU ref
+    >   -- |
+    >   -- This shows that modifySTRefU is strict in its argument.
+    >   strictModify :: Int
+    >   strictModify =
+    >     runST $
+    >       do
+    >         ref <- newSTRefU 0
+    >         modifySTRefU ref (\_ -> Unsafe.unsafePerformIO $ print "Got here!" >> pure 10)
+    >         writeSTRefU ref 42
+    >          readSTRefU ref
+    >
     .
     This gives the following:
     .
@@ -87,7 +85,6 @@ Library
   hs-source-dirs:   src
 
   ghc-options:      -Wall
-                    -O2
                     -fexpose-all-unfoldings
                     -fspecialize-aggressively
                     -Wincomplete-patterns
@@ -109,7 +106,6 @@ Executable example
   hs-source-dirs:   src
 
   ghc-options:      -Wall
-                    -O2
                     -fexpose-all-unfoldings
                     -fspecialize-aggressively
                     -Wincomplete-patterns
