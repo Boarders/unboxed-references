@@ -1,4 +1,4 @@
-## `unboxed-st-ref`
+## `unboxed-references`
 
 A library providing unboxed references backed by Unboxed mutable vectors.
 
