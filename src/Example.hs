@@ -1,9 +1,9 @@
 module Main where
 
-import           Data.STRef.Unboxed
 import           Control.Monad.ST
 import           Data.Foldable
-import qualified System.IO.Unsafe as Unsafe
+import           Data.STRef.Unboxed
+import qualified System.IO.Unsafe   as Unsafe
 
 main :: IO ()
 main =

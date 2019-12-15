@@ -11,10 +11,10 @@ module Data.STRef.Unboxed
   , modifySTRefU
   ) where
 
-import Data.Vector.Unboxed.Mutable (MVector, Unbox)
+import           Control.Monad.ST
+import           Data.Coerce
+import           Data.Vector.Unboxed.Mutable (MVector, Unbox)
 import qualified Data.Vector.Unboxed.Mutable as Unboxed
-import Control.Monad.ST
-import Data.Coerce
 
 
 -- |
