@@ -54,9 +54,9 @@ strictModify =
 ```
 
 ```haskell
-    > main
-      100
-      55
-      "Got here!"
-      42
+> main
+100
+55
+"Got here!"
+42
 ```
