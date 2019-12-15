@@ -19,7 +19,7 @@ import qualified Data.Vector.Unboxed.Mutable as Unboxed
 
 -- |
 -- An unboxed mutable variable that can hold any type which is
--- an instance of 'Unbox'. This is backed by a length 1 unboxed
+-- an instance of 'Unbox'. This is backed by a length one unboxed
 -- mutable vector.
 newtype STRefU s a = STRefU {getSTRefU :: MVector s a}
 
@@ -32,6 +32,8 @@ newSTRefU a =
     mv <- Unboxed.unsafeNew 1
     Unboxed.write mv 0 a
     pure (coerce mv)
+
+
 -- |
 -- Read the value in a reference cell.
 readSTRefU :: (Unbox a) => STRefU s a -> ST s a
