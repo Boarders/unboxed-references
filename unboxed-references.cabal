@@ -110,10 +110,32 @@ Executable example
                     -fspecialize-aggressively
                     -Wincomplete-patterns
 
-  other-modules: Data.STRef.Unboxed
+  other-modules:    Data.STRef.Unboxed
 
   build-depends:    unboxed-references
                   , base        >= 4.12.0.0 && < 4.14
                   , vector      >= 0.12.0   && < 0.13
+
+  default-language: Haskell2010
+
+
+Benchmark bench
+
+  main-is:          Bench.hs
+
+  type:             exitcode-stdio-1.0
+
+  hs-source-dirs:   bench
+
+  ghc-options:      -Wall
+                    -fexpose-all-unfoldings
+                    -fspecialize-aggressively
+                    -Wincomplete-patterns
+
+  build-depends:    unboxed-references
+                  , base            >= 4.12.0.0 && < 4.14
+                  , vector          >= 0.12.0   && < 0.13
+                  , criterion       >= 1.5.6.1  && < 1.6
+                  , vector-th-unbox >= 0.2.1.7  && < 0.3
 
   default-language: Haskell2010
